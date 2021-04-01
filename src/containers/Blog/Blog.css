@@ -1,10 +1,4 @@
-.Posts {
-    display: flex;
-    flex-flow: row wrap;
-    justify-content: center;
-    width: 80%;
-    margin: auto;
-}
+
 
 ul{
     list-style: none;
@@ -27,7 +21,10 @@ ul li a{
 }
 
 ul li a:hover,
-ul li a:active{
+ul li a:active,
+ul li a.active
+
+{
 
     color: #fa923f;
 }
