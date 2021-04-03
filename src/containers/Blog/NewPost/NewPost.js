@@ -2,13 +2,25 @@ import React, { Component } from "react";
 
 import axios from "axios";
 import "./NewPost.css";
+import {Redirect} from "react-router-dom";
 
 class NewPost extends Component {
   state = {
     title: "",
     content: "",
     author: "Max",
+    submitted: false,
+    auth:true,
   };
+
+  componentDidMount() {
+
+    // For Routing Guard
+    if(!this.state.auth)
+    {
+      this.props.history.replace('/')
+    }
+  }
 
   postData = () => {
     const post = {
@@ -20,12 +32,25 @@ class NewPost extends Component {
       .post("https://jsonplaceholder.typicode.com/posts", post)
       .then((response) => {
         console.log(response);
+
+        // Redirecting and pushing are doing the
+        // same thing but they are little bit tricky in a sense that we
+        //Can't go back in case of redirect becuse its just replacing the current path not 
+        //push new page on the stack. Same case with .replacr instead of push
+        this.props.history.push('/');
+        //this.setState({submitted: true});
       });
   };
 
   render() {
+    let redirect  = null;
+    if(this.state.submitted)
+    {
+      redirect = <Redirect to="/" />
+    }
     return (
       <div className="NewPost">
+        {redirect }
         <h1>Add a Post</h1>
         <label>Title</label>
         <input

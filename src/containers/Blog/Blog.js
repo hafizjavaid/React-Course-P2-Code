@@ -2,15 +2,18 @@ import React, { Component } from "react";
 
 import "./Blog.css";
 
-import {Route, NavLink} from "react-router-dom"
+import { Route, NavLink } from "react-router-dom";
 
-import Posts from "./Posts/Posts"
+import Posts from "./Posts/Posts";
 
 // import Post from './FullPost/FullPost'
 
-import NewPost from './NewPost/NewPost'
+import NewPost from "./NewPost/NewPost";
 
 class Blog extends Component {
+  state = {
+    auth: false,
+  };
   render() {
     return (
       <div>
@@ -19,10 +22,9 @@ class Blog extends Component {
           <nav>
             <ul>
               <li>
-                <NavLink
-                 exact
-                  to="/"
-                  >Posts</NavLink>
+                <NavLink exact to="/">
+                  Posts
+                </NavLink>
               </li>
               <li>
                 <NavLink to="/new-post">New Post</NavLink>
@@ -31,13 +33,16 @@ class Blog extends Component {
           </nav>
         </header>
 
-          <Route path="/"
-           component={Posts} />
-          <Route path="/new-post"
-           component={NewPost} />
-             {/* <Route path="/posts/:id" exact 
+        {/* <Switch> */}
+          {this.state.auth ? <Route path="/new-post" component={NewPost} /> : null}
+
+          <Route path="/new-post" component={NewPost} />
+          <Route path="/" component={Posts} />
+          {/* <Redirect to="/" /> */}
+
+          {/* <Route path="/posts/:id" exact 
              component={Post} /> */}
-         
+        {/* </Switch> */}
       </div>
     );
   }
