@@ -29,6 +29,7 @@ class Posts extends Component {
   }
   postSelected = (id) => {
 
+    // Programmitically or Manually Pusing the link to route
     this.props.history.push({pathname: '/posts/' + id})
     // this.setState({ selectedId: id });
   };
@@ -52,6 +53,7 @@ class Posts extends Component {
         <div>
         <section className="Posts">{posts}</section>
          
+        {/* this.props.match.url  " This is current URL" */}
          <Route path={this.props.match.url + 'posts/:id'} exact component={FullPost} />
 
         </div>

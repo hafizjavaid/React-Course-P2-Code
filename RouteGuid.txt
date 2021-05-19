@@ -1,0 +1,82 @@
+1. Install the react-router and react-router-dome
+2. // With "withRouter" we can access the routing related thing within the component which is not the
+// the part of dirrectly route component and it exist within the route component as a child.
+export default withRouter(post);
+3.     {/* This can be link and we can also pass object to="" */}
+                <NavLink exact to="/">
+                  Posts{" "}
+                </NavLink>{" "}
+
+4. Relative vs Absolute Path
+
+i) Relative Path:
+When We can append the link into the existing route of our append
+ii) Absolute Path:
+Always append to the / path.
+
+// this is an Relative Path
+ 
+         <Route path={this.props.match.url + 'posts/:id'} exact component={FullPost} />
+
+
+5. NavLink vs link:
+Both are same but using the NavLink we can have active class by default and we can style it using css.
+
+ {/* This can be link and we can also pass object to="" */}
+                <NavLink activeClassName="" activeStyle={{color: 'red'}} exact to="/">
+                  Posts{" "}
+                </NavLink>{" "}
+
+
+6. Manuall Route:
+  // Programmitically or Manually Pusing the link to route
+    this.props.history.push({pathname: '/posts/' + id})
+    // this.setState({ selectedId: id });
+
+
+7. Nested Routes:
+We use this technique as here we are accesing the current path
+ {/* this.props.match.url  " This is current URL" */}
+         <Route path={this.props.match.url + 'posts/:id'} exact component={FullPost} />
+
+
+8. Tricky thing in Nested Routes
+// How to update the current route which is already loaded in the current page.
+
+We have to update or call the following instance and run code in the following instance:
+ componentDidUpdate(){
+    this.loadedData();
+
+  }
+
+
+9. Routing Guard:
+
+
+ {/* Routing Guard */}
+        {this.state.auth ? (
+          <Route path="/new-post" component={NewPost} />
+        ) : null}
+{/* Routing Guard */}
+
+============= OR =============
+
+we can do in the componentDidMount() methode
+
+  componentDidMount() {
+
+    // For Routing Guard
+    if(!this.state.auth)
+    {
+      this.props.history.replace('/')
+    }
+  }
+
+
+10.Unknown Routing OR 404 Error:
+
+ {/* If we specify the route without assigning the path attribut
+        then the component we mentioned or render here will be displayed on the scrreem
+        ne important thing is that it is not working with the Redirect. */}
+        <Route  component={Posts} />
+        <Route  render={()=> {<h1>404 Page</h1>}} />

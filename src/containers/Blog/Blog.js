@@ -17,31 +17,39 @@ class Blog extends Component {
   render() {
     return (
       <div>
-        {/* Header */}
+        {" "}
+        {/* Header */}{" "}
         <header>
           <nav>
             <ul>
               <li>
+                {/* This can be link and we can also pass object to="" */}
                 <NavLink exact to="/">
                   Posts
                 </NavLink>
               </li>
               <li>
-                <NavLink to="/new-post">New Post</NavLink>
+                <NavLink to="/new-post"> New Post </NavLink>{" "}
               </li>
             </ul>
           </nav>
         </header>
-
         {/* <Switch> */}
-          {this.state.auth ? <Route path="/new-post" component={NewPost} /> : null}
-
+        {/* Routing Guard */}
+        {this.state.auth ? (
           <Route path="/new-post" component={NewPost} />
-          <Route path="/" component={Posts} />
-          {/* <Redirect to="/" /> */}
+        ) : null}
+        {/* Routing Guard */}
+        <Route path="/new-post" component={NewPost} />
 
-          {/* <Route path="/posts/:id" exact 
-             component={Post} /> */}
+        {/* If we specify the route without assigning the path attribut
+        then the component we mentioned or render here will be displayed on the scrreem
+        ne important thing is that it is not working with the Redirect. */}
+        <Route  component={Posts} />
+        <Route path="/" component={Posts} />
+         {/* <Redirect to="/" /> */}
+        {/* <Route path="/posts/:id" exact 
+                                 component={Post} /> */}
         {/* </Switch> */}
       </div>
     );

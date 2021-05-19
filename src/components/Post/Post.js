@@ -16,4 +16,6 @@ const post = (props) => {
   );
 };
 
+// With "withRouter" we can access the routing related thing within the component which is not the
+// the part of dirrectly route component and it exist within the route component as a child.
 export default withRouter(post);
